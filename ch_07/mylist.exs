@@ -51,4 +51,18 @@ defmodule MyList do
   def caesar([head | tail], n) do
     [head + n - 26 | caesar(tail, n)]
   end
+
+  # Exercise: ListsAndRecursion-4
+  def span(from, to) when from === to, do: [from]
+  def span(from, to) when from < to do
+    [from | span(from + 1, to)]
+  end
+  def span(from, to) when from > to do
+    [from | span(from - 1, to)]
+  end
+
+  def dave_span(from, to) when from > to, do: []
+  def dave_span(from,to) do
+    [from | span(from + 1, to)]
+  end
 end
