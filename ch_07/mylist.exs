@@ -65,4 +65,30 @@ defmodule MyList do
   def dave_span(from,to) do
     [from | span(from + 1, to)]
   end
+
+  # Exercise: ListsAndRecursion-5
+  def all?([], _func), do: true
+
+  def all?([head | tail] = _list, func) do
+    if func.(head) do
+      all?(tail, func)
+    else
+      false
+    end
+  end
+
+  def each([], _func), do: []
+  def each([head | tail] = _list, func) do
+    [func.(head) | each(tail, func)]
+  end
+
+  def filter([], _func), do: []
+  def filter([head | tail], func) do
+    if func.(head) do
+      [head | filter(tail, func)]
+    else
+      filter(tail, func)
+    end
+
+  end
 end
