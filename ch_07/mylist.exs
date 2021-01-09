@@ -89,6 +89,11 @@ defmodule MyList do
     else
       filter(tail, func)
     end
+  end
+
+  def split([], _count), do: _split(list, front, count)
+  defp _split([], front, _count), do: Enum.reverse(front)
 
   end
+
 end
