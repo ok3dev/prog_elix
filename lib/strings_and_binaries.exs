@@ -5,11 +5,5 @@ defmodule StringsAndBinaries do
     Enum.all?(chars, fn char -> char >= 32 and char <= 126 end)
   end
 
-  def anagram?(word1, word2) do
-    if word1 -- word2 === [] do
-      true
-    else
-      false
-    end
-  end
+  def anagram?(word1, word2), do: word1 -- word2 === []
 end
