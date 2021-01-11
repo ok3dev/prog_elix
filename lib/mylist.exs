@@ -103,35 +103,27 @@ defmodule MyList do
 
   # Exercise ListsAndRecursion-8
 
-  orders = [
-    [id: 123, ship_to: :NC, net_amount: 100.00],
-    [id: 124, ship_to: :OK, net_amount: 35.50],
-    [id: 125, ship_to: :TX, net_amount: 24.00],
-    [id: 126, ship_to: :TX, net_amount: 44.80],
-    [id: 127, ship_to: :NC, net_amount: 25.00],
-    [id: 128, ship_to: :MA, net_amount: 10.00],
-    [id: 129, ship_to: :CA, net_amount: 102.00],
-    [id: 120, ship_to: :NC, net_amount: 50.00]
-  ]
-
   def order_with_tax(orders) do
-    for [id: id, ship_to: state, net_amount: amount] = order <- orders do
+    for order <- orders do
       add_tax(order)
     end
   end
 
-  # ***** TODO ******
-  # Refactor so that there isn't so much duplication
-  # Try using `Keyword.get` for the tax_rates instead
-  defp add_tax([_, ship_to: :NC, net_amount: net] = order) do
-    order ++ [total_amount: net + net * 0.075]
-  end
-
-  defp add_tax([_, ship_to: :TX, net_amount: net] = order) do
-    order ++ [total_amount: net + net * 0.08]
-  end
-
-  defp add_tax([_, _, net_amount: net] = order) do
-    order ++ [total_amount: net]
+  def add_tax([_, ship_to: state, net_amount: net] = order) do
+    tax_rates = [NC: 0.075, TX: 0.08]
+    order ++ [total_amount: net + net * Keyword.get(tax_rates, state, 0)]
   end
 end
+
+
+# Orders from exercise example
+# orders = [
+#   [id: 123, ship_to: :NC, net_amount: 100.00],
+#   [id: 124, ship_to: :OK, net_amount: 35.50],
+#   [id: 125, ship_to: :TX, net_amount: 24.00],
+#   [id: 126, ship_to: :TX, net_amount: 44.80],
+#   [id: 127, ship_to: :NC, net_amount: 25.00],
+#   [id: 128, ship_to: :MA, net_amount: 10.00],
+#   [id: 129, ship_to: :CA, net_amount: 102.00],
+#   [id: 120, ship_to: :NC, net_amount: 50.00]
+# ]
