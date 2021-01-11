@@ -120,8 +120,9 @@ defmodule MyList do
     end
   end
 
-  # defp add_tax([_, ship_to: NC, _, _])
-
+  # ***** TODO ******
+  # Refactor so that there isn't so much duplication
+  # Try using `Keyword.get` for the tax_rates instead
   defp add_tax([_, ship_to: :NC, net_amount: net] = order) do
     order ++ [total_amount: net + net * 0.075]
   end
